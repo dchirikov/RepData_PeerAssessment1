@@ -358,7 +358,10 @@ head(steps.mean)
 Make a time series plot for weekday and weekends patterns:
 
 ```r
-steps.mean.melted<-melt(steps.mean[,c("interval","steps.mean.weekday","steps.mean.weekends")],value.name="steps")
+steps.mean.melted <- melt(
+        steps.mean[, c("interval", "steps.mean.weekday", "steps.mean.weekends")],
+        value.name="steps"
+    )
 ```
 
 ```
@@ -366,8 +369,15 @@ steps.mean.melted<-melt(steps.mean[,c("interval","steps.mean.weekday","steps.mea
 ```
 
 ```r
-steps.mean.melted$time<-as.POSIXlt(steps.mean.melted$interval,format="%H%M")
-ggplot(steps.mean.melted, aes(x=time, y=steps))+geom_line()+scale_x_datetime(labels=date_format("%H:%M"),breaks = date_breaks("1 hour")) + theme(axis.text.x = element_text(angle = 90, hjust = 1))+facet_grid(variable ~ .)
+steps.mean.melted$time <- as.POSIXlt(steps.mean.melted$interval, format = "%H%M")
+ggplot(steps.mean.melted, aes(x=time, y=steps)) +
+    geom_line() +
+    scale_x_datetime(
+        labels = date_format("%H:%M"),
+        breaks = date_breaks("1 hour")
+    ) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    facet_grid(variable ~ .)
 ```
 
 ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19-1.png) 
